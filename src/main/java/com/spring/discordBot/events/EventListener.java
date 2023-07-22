@@ -1,9 +1,8 @@
-package bot;
+package com.spring.discordBot.events;
 
 import discord4j.core.event.domain.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 public interface EventListener<T extends Event> {

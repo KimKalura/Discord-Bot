@@ -1,4 +1,4 @@
-package bot;
+package com.spring.discordBot.events;
 
 import discord4j.core.event.domain.message.MessageUpdateEvent;
 import org.springframework.stereotype.Service;
@@ -19,4 +19,5 @@ public class MessageUpdateListener extends MessageListener implements EventListe
                 .flatMap(MessageUpdateEvent::getMessage)
                 .flatMap(super::processCommand);
     }
+
 }

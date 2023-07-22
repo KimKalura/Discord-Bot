@@ -1,4 +1,4 @@
-package bot;
+package com.spring.discordBot.events;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import org.springframework.stereotype.Service;
@@ -16,4 +16,5 @@ public class MessageCreateListener extends MessageListener implements EventListe
     public Mono<Void> execute(MessageCreateEvent event) {
         return processCommand(event.getMessage());
     }
+
 }
