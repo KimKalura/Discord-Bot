@@ -34,16 +34,54 @@ public abstract class MessageListener {
                     return isNotBot;
                 })
                 .flatMap(message -> switch (message.getContent()) {
-                    case "!todo" -> processTodoCommand(message);
+                    case "!todo monday", "!todo tuesday", "!todo wednesday", "!todo thursday", "!todo friday", "!todo saturday", "!todo sunday" ->
+                            processTodoCommand(message);
                     case "hello" -> processHelloCommand(message);
                     default -> processDefaultCommand(message);
                 });
     }
 
     private Mono<Void> processTodoCommand(Message eventMessage) {
-        return eventMessage.getChannel()
+       /* return eventMessage.getChannel()
                 .flatMap(channel -> channel.createMessage("Things to do today:\n - write a bot\n - read a book\n - algorithms"))
-                .then();
+                .then();*/
+
+        String content = eventMessage.getContent();
+
+        if (content.contains("!todo monday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - read a book\n - algorithms\n - build an app"))
+                    .then();
+        } else if (content.contains("!todo tuesday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - eine Sprache üben\n - build an app\n - algorithms"))
+                    .then();
+
+        } else if (content.contains("!todo wednesday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - read a book\n - learn a new programming language\n - algorithms"))
+                    .then();
+        } else if (content.contains("!todo thursday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - read a book\n - eine Sprache üben\n - algorithms"))
+                    .then();
+        } else if (content.contains("!todo friday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - read something\n - play guitar\n - algorithms"))
+                    .then();
+        } else if (content.contains("!todo saturday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - build an app\n -  read a book\n - algorithms"))
+                    .then();
+        } else if (content.contains("!todo sunday")) {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Things to do today:\n - learn a new programming language\n - read a book\n -  read a book"))
+                    .then();
+        } else {
+            return eventMessage.getChannel()
+                    .flatMap(channel -> channel.createMessage("Choose a day of the week. Example: !todo monday"))
+                    .then();
+        }
     }
 
     private Mono<Void> processHelloCommand(Message eventMessage) {
